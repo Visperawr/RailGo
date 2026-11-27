@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JasperReports 6.21.3 - Laporan data tiket -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Simple_Blue" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5b2f0ba-9c5d-478c-bdd8-61231a99100e">
+    <queryString language="SQL"><![CDATA[SELECT id, nomor_kursi, nama_penumpang FROM tiket ORDER BY nomor_kursi]]></queryString>
+    <field name="id" class="java.lang.Integer"/>
+    <field name="nomor_kursi" class="java.lang.Integer"/>
+    <field name="nama_penumpang" class="java.lang.String"/>
+    <background><band/></background>
+    <title><band height="72"><frame>
+        <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="7c88553f-e7c5-4b86-b257-6ff20f238c48"/>
+        <staticText><reportElement x="20" y="20" width="330" height="43" forecolor="#FFFFFF" uuid="bf3a8587-152f-40ed-9efa-602e77093741"/><textElement><font size="30" isBold="true"/></textElement><text><![CDATA[DATA TIKET]]></text></staticText>
+        <staticText><reportElement x="355" y="43" width="220" height="20" forecolor="#FFFFFF" uuid="1cc986b7-9b17-48fc-a5c5-1b7b5fbb497d"/><textElement textAlignment="Right"><font size="12"/></textElement><text><![CDATA[Laporan Pemesanan Tiket]]></text></staticText>
+    </frame></band></title>
+    <pageHeader><band height="13"/></pageHeader>
+    <columnHeader><band height="22">
+        <line><reportElement x="-20" y="21" width="595" height="1" forecolor="#666666" uuid="d456f198-f897-4557-b862-15f92f3cd22f"/></line>
+        <staticText><reportElement mode="Opaque" x="0" y="0" width="100" height="21" forecolor="#006699" backcolor="#E6E6E6" uuid="2d564b92-82bb-4277-b9eb-8f8bd2cc58c1"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="12" isBold="true"/></textElement><text><![CDATA[ID]]></text></staticText>
+        <staticText><reportElement mode="Opaque" x="100" y="0" width="150" height="21" forecolor="#006699" backcolor="#E6E6E6" uuid="3a2f08cd-eba1-492b-945e-92f364d9df9e"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="12" isBold="true"/></textElement><text><![CDATA[NOMOR KURSI]]></text></staticText>
+        <staticText><reportElement mode="Opaque" x="250" y="0" width="305" height="21" forecolor="#006699" backcolor="#E6E6E6" uuid="48e0aa45-955f-4459-92c8-ecd0f8ae582a"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="12" isBold="true"/></textElement><text><![CDATA[NAMA PENUMPANG]]></text></staticText>
+    </band></columnHeader>
+    <detail><band height="22">
+        <line><reportElement positionType="FixRelativeToBottom" x="0" y="21" width="555" height="1" uuid="a2167594-5862-439a-8378-71bed1f8c85b"/></line>
+        <textField><reportElement x="0" y="0" width="100" height="21" uuid="e8e2d39e-1180-4998-8507-3779678fddfe"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="12"/></textElement><textFieldExpression><![CDATA[$F{id}]]></textFieldExpression></textField>
+        <textField><reportElement x="100" y="0" width="150" height="21" uuid="4a744ba8-c16c-4e03-aecf-0a1567691314"/><textElement textAlignment="Center" verticalAlignment="Middle"><font size="12"/></textElement><textFieldExpression><![CDATA[$F{nomor_kursi}]]></textFieldExpression></textField>
+        <textField textAdjust="StretchHeight"><reportElement x="250" y="0" width="305" height="21" uuid="0362d033-5fb0-49a4-bef5-74ccb1561ea7"/><textElement verticalAlignment="Middle"><font size="12"/></textElement><textFieldExpression><![CDATA[$F{nama_penumpang}]]></textFieldExpression></textField>
+    </band></detail>
+    <columnFooter><band/></columnFooter>
+    <pageFooter><band height="20">
+        <textField pattern="dd MMMM yyyy"><reportElement x="0" y="4" width="150" height="13" uuid="712304e4-4217-47f7-8738-2ac7dcc5faa7"/><textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression></textField>
+        <textField><reportElement mode="Opaque" x="350" y="4" width="165" height="13" backcolor="#E6E6E6" uuid="c2bb0446-4aad-49a1-9293-63c8515da62a"/><textElement textAlignment="Right"/><textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER} + " dari"]]></textFieldExpression></textField>
+        <textField evaluationTime="Report"><reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="a88cf7da-c476-4428-850c-f911c2a717de"/><textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression></textField>
+    </band></pageFooter>
+    <summary><band/></summary>
+</jasperReport>

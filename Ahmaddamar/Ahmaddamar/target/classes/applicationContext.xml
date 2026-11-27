@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- Koneksi ke database MySQL (Laragon) -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/db_ahmaddamar" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
+
+    <!-- SessionFactory Hibernate dikelola oleh Spring -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+    </bean>
+
+    <!-- Transaction manager untuk Hibernate -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- Mengaktifkan @Transactional (Declarative Transaction via AOP) -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- DAO: SessionFactory disuntikkan oleh Spring (setter injection) -->
+    <bean id="daoKeluhan" class="com.mycompany.ahmaddamar.dao.KeluhanDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="daoTiket" class="com.mycompany.ahmaddamar.dao.TiketDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <!-- Service: DAO disuntikkan oleh Spring (setter injection) -->
+    <bean id="serviceKeluhan" class="com.mycompany.ahmaddamar.service.KeluhanService">
+        <property name="keluhanDAO" ref="daoKeluhan" />
+    </bean>
+    <bean id="serviceData" class="com.mycompany.ahmaddamar.service.DataService">
+        <property name="tiketDAO" ref="daoTiket" />
+        <property name="keluhanDAO" ref="daoKeluhan" />
+    </bean>
+
+</beans>
